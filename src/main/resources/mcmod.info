@@ -1,0 +1,21 @@
+[
+{
+  "modid" : "cool",
+  "name" : "Cool",
+  "version" : "1.0",
+  "url" : "",
+  "credits" : "Cooler",
+  "authors": [
+    "Cooler"
+  ],
+  "description": "Cool stuff",
+  "logoFile" : "",
+  "updateUrl" : "",
+  "parent" : "",
+  "screenshots": [
+  ],
+  "dependancies": [
+    "Forge"
+  ]
+}
+]
