@@ -34,7 +34,7 @@ public class cool
         coolItems.init();
         coolBlocks.init();
         coolTileEntities.init();
-        clientProxy.registerTESR();
+        proxy.registerTESR();
     }
 
     @Mod.EventHandler

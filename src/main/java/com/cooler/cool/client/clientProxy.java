@@ -11,7 +11,7 @@ import cpw.mods.fml.client.registry.ClientRegistry;
  */
 public class clientProxy extends commonProxy
 {
-    public static void registerTESR()
+    public void registerTESR()
     {
         ClientRegistry.bindTileEntitySpecialRenderer(tilePlanetary.class, new planetaryRenderer());
     }

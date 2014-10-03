@@ -5,4 +5,9 @@ package com.cooler.cool;
  */
 public class serverProxy extends commonProxy
 {
+    @Override
+    public void registerTESR()
+    {
+
+    }
 }

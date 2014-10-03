@@ -5,4 +5,5 @@ package com.cooler.cool;
  */
 public interface iProxy
 {
+    public void registerTESR();
 }
