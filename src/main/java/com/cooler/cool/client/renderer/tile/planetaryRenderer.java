@@ -2,9 +2,6 @@ package com.cooler.cool.client.renderer.tile;
 
 import static com.cooler.cool.reference.reference.*;
 
-import com.cooler.cool.block.blockPlanetary;
-import com.cooler.cool.util.objRendering;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;

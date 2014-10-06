@@ -1,5 +1,7 @@
 item.ItemFrog.name=Frog
+item.ItemFreeze.name=Freeze
 
 tile.BlockPlanetary.name=Planetary Frog
+tile.BlockFrozen.name=Frozen
 
 itemGroup.cool=Cool Mod
