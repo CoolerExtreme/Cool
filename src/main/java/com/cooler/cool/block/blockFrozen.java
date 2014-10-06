@@ -46,9 +46,12 @@ public class blockFrozen extends blockCool implements ITileEntityProvider
     {
         tileFrozen frozen = (tileFrozen)iBlockAccess.getTileEntity(x, y, z);
         if(frozen != null)
-        {
-            if(frozen.frozenItemstack != null)
+        {System.out.println("tile is not null");
+            if (frozen.frozenItemstack != null)
+            {
+                System.out.println("itemstack is not null");
                 return frozen.frozenItemstack.getIconIndex();
+            }
             else
                 return this.blockIcon;
         }

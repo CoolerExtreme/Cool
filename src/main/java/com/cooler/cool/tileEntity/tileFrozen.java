@@ -18,7 +18,7 @@ public class tileFrozen extends tileCool
         NBTTagCompound tagCompound1 = new NBTTagCompound();
         tagCompound1 = (NBTTagCompound)tagCompound.getTag("Icon");
         if(tagCompound1 != null)
-            frozenItemstack.setTagCompound(tagCompound1);
+            frozenItemstack.readFromNBT(tagCompound1);
     }
 
     @Override
@@ -26,7 +26,11 @@ public class tileFrozen extends tileCool
     {
         super.writeToNBT(tagCompound);
         if(frozenItemstack != null)
-            tagCompound.setTag("Icon",frozenItemstack.getTagCompound());
+        {
+            NBTTagCompound tagCompound1 = new NBTTagCompound();
+            frozenItemstack.writeToNBT(tagCompound1);
+            tagCompound.setTag("Icon", tagCompound1);
+        }
     }
 
     public void setFrozenIcon(ItemStack icon)
