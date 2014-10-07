@@ -40,6 +40,7 @@ public class itemFreeze extends itemCool
             world.setBlock(x, y, z, coolBlocks.frozen);
             ((tileFrozen)world.getTileEntity(x, y, z)).setFrozenBlockData(id, meta);
             world.markBlockForUpdate(x, y, z);
+            world.notifyBlockChange(x, y, z, coolBlocks.frozen);
         }
         return false;
     }
