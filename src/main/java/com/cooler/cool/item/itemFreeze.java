@@ -1,14 +1,10 @@
 package com.cooler.cool.item;
 
-import com.cooler.cool.block.blockFrozen;
-import com.cooler.cool.block.blockPlanetary;
 import com.cooler.cool.init.coolBlocks;
 import com.cooler.cool.tileEntity.tileFrozen;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import org.lwjgl.Sys;
 
@@ -37,11 +33,13 @@ public class itemFreeze extends itemCool
         {
             return false;
         }
-        ItemStack icon = new ItemStack(block.getItem(world, x, y, z));
+        int id = Block.getIdFromBlock(block);
+        int meta = world.getBlockMetadata(x, y, z);
         if(!world.isRemote)
         {
             world.setBlock(x, y, z, coolBlocks.frozen);
-            ((tileFrozen)world.getTileEntity(x, y, z)).setFrozenIcon(icon);
+            ((tileFrozen)world.getTileEntity(x, y, z)).setFrozenBlockData(id, meta);
+            world.markBlockForUpdate(x, y, z);
         }
         return false;
     }

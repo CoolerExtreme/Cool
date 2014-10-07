@@ -4,6 +4,7 @@ import com.cooler.cool.item.itemFrog;
 import com.cooler.cool.tileEntity.tileFrozen;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -42,22 +43,15 @@ public class blockFrozen extends blockCool implements ITileEntityProvider
 
     @Override
     @SideOnly(Side.CLIENT)
-    public IIcon getIcon(IBlockAccess iBlockAccess, int x, int y, int z, int p_149673_5_)
+    public IIcon getIcon(IBlockAccess iBlockAccess, int x, int y, int z, int side)
     {
         tileFrozen frozen = (tileFrozen)iBlockAccess.getTileEntity(x, y, z);
         if(frozen != null)
-        {System.out.println("tile is not null");
-            if (frozen.frozenItemstack != null)
-            {
-                System.out.println("itemstack is not null");
-                return frozen.frozenItemstack.getIconIndex();
-            }
-            else
-                return this.blockIcon;
+        {
+            Block block = Block.getBlockById(frozen.frozenID);
+            return block.getIcon(side, frozen.frozenMeta);
         }
         else
-        {
             return this.blockIcon;
-        }
     }
 }

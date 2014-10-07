@@ -1,41 +1,53 @@
 package com.cooler.cool.tileEntity;
 
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.IIcon;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 
 /**
  * Created by Test on 10/6/2014.
  */
 public class tileFrozen extends tileCool
 {
-    public ItemStack frozenItemstack;
+    public int frozenID = 0;
+    public int frozenMeta = 0;
 
     @Override
     public void readFromNBT(NBTTagCompound tagCompound)
     {
         super.readFromNBT(tagCompound);
-        NBTTagCompound tagCompound1 = new NBTTagCompound();
-        tagCompound1 = (NBTTagCompound)tagCompound.getTag("Icon");
-        if(tagCompound1 != null)
-            frozenItemstack.readFromNBT(tagCompound1);
+        frozenID = tagCompound.getInteger("Frozen ID");
+        frozenMeta = tagCompound.getInteger("Frozen Meta");
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tagCompound)
     {
         super.writeToNBT(tagCompound);
-        if(frozenItemstack != null)
-        {
-            NBTTagCompound tagCompound1 = new NBTTagCompound();
-            frozenItemstack.writeToNBT(tagCompound1);
-            tagCompound.setTag("Icon", tagCompound1);
-        }
+        tagCompound.setInteger("Frozen ID", frozenID);
+        tagCompound.setInteger("Frozen Meta", frozenMeta);
     }
 
-    public void setFrozenIcon(ItemStack icon)
+    public void setFrozenBlockData(int id, int meta)
     {
-        if(icon != null)
-            frozenItemstack = icon;
+        this.frozenID = id;
+        this.frozenMeta = meta;
+    }
+
+    @Override
+    public Packet getDescriptionPacket()
+    {
+        NBTTagCompound nbt = new NBTTagCompound();
+        this.writeToNBT(nbt);
+        return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 0, nbt);
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
+    {
+        this.readFromNBT(packet.func_148857_g());
     }
 }
