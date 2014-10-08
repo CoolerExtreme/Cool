@@ -1,9 +1,11 @@
 package com.cooler.cool.item;
 
+import com.cooler.cool.block.blockFrozen;
 import com.cooler.cool.init.coolBlocks;
 import com.cooler.cool.tileEntity.tileFrozen;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import org.lwjgl.Sys;
@@ -29,7 +31,7 @@ public class itemFreeze extends itemCool
     public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
     {
         Block block = world.getBlock(x, y, z);
-        if (block == null)
+        if (block == null || block == Blocks.air || block instanceof blockFrozen)
         {
             return false;
         }
@@ -37,10 +39,8 @@ public class itemFreeze extends itemCool
         int meta = world.getBlockMetadata(x, y, z);
         if(!world.isRemote)
         {
-            world.setBlock(x, y, z, coolBlocks.frozen);
-            ((tileFrozen)world.getTileEntity(x, y, z)).setFrozenBlockData(id, meta);
-            world.markBlockForUpdate(x, y, z);
-            world.notifyBlockChange(x, y, z, coolBlocks.frozen);
+            world.setBlock(x, y, z, coolBlocks.frozen, meta, 3);
+            ((tileFrozen)world.getTileEntity(x, y, z)).setFrozenBlockData(id, meta, world);
         }
         return false;
     }

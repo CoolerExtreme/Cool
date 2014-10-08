@@ -6,6 +6,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.world.World;
+import org.lwjgl.Sys;
 
 /**
  * Created by Test on 10/6/2014.
@@ -31,10 +33,11 @@ public class tileFrozen extends tileCool
         tagCompound.setInteger("Frozen Meta", frozenMeta);
     }
 
-    public void setFrozenBlockData(int id, int meta)
+    public void setFrozenBlockData(int id, int meta,World world)
     {
         this.frozenID = id;
         this.frozenMeta = meta;
+        world.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
     }
 
     @Override
